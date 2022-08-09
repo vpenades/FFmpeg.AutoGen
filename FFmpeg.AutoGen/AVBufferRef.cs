@@ -17,21 +17,15 @@ namespace FFmpeg.AutoGen
             }
         }
 
-        public unsafe ReadOnlySpan<Byte> ReadOnlyBuffer
+        public unsafe ReadOnlySpan<byte> GetReadOnlyBuffer()
         {
-            get
-            {
-                return new ReadOnlySpan<Byte>((void*)data, (int)size);
-            }
+            return new ReadOnlySpan<Byte>((void*)data, (int)size);
         }
 
-        public unsafe Span<Byte> WriteableBuffer
+        public unsafe Span<byte> GetWriteableBuffer()
         {
-            get
-            {
-                if (!IsWriteable) throw new InvalidOperationException("The buffer is read only.");
-                return new Span<Byte>((void*)data, (int)size);
-            }
+            if (!IsWriteable) throw new InvalidOperationException("The buffer is read only.");
+            return new Span<Byte>((void*)data, (int)size);
         }
     }
 }
